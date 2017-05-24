@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.udacity.stockhawk.R;
+import com.udacity.stockhawk.Utility;
 import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.PrefUtils;
 import com.udacity.stockhawk.sync.QuoteSyncJob;
@@ -33,13 +34,14 @@ import timber.log.Timber;
 import static com.udacity.stockhawk.sync.QuoteSyncJob.ACTION_DATA_UPDATED;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,
-        SwipeRefreshLayout.OnRefreshListener,
-        StockAdapter.StockAdapterOnClickHandler
-{
+        SwipeRefreshLayout.OnRefreshListener, StockAdapter.StockAdapterOnClickHandler {
 
     private static final int STOCK_LOADER = 0;
 
     public static final String THE_QUOTE_KEY = "THE_QUOTE_KEY";
+    
+    private static final int ZERO_ENTRIES = 0;
+
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.recycler_view)
     RecyclerView stockRecyclerView;
@@ -106,23 +108,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     }
 
-    private boolean networkUp() {
-        ConnectivityManager cm =
-                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-        return networkInfo != null && networkInfo.isConnectedOrConnecting();
-    }
-
     @Override
     public void onRefresh() {
 
         QuoteSyncJob.syncImmediately(this);
 
-        if (!networkUp() && adapter.getItemCount() == 0) {
+        if (!Utility.networkUp(this) && adapter.getItemCount() == 0) {
             swipeRefreshLayout.setRefreshing(false);
             error.setText(getString(R.string.error_no_network));
             error.setVisibility(View.VISIBLE);
-        } else if (!networkUp()) {
+        } else if (!Utility.networkUp(this)) {
             swipeRefreshLayout.setRefreshing(false);
             Toast.makeText(this, R.string.toast_no_connectivity, Toast.LENGTH_LONG).show();
         } else if (PrefUtils.getStocks(this).size() == 0) {
@@ -142,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         if (symbol != null && !symbol.isEmpty()) {
 
-            if (networkUp()) {
+            if (Utility.networkUp(this)) {
                 swipeRefreshLayout.setRefreshing(true);
 
                 PrefUtils.addStock(this, symbol);
@@ -174,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         swipeRefreshLayout.setRefreshing(false);
 
-        if (data.getCount() != 0) {
+        if (data.getCount() != ZERO_ENTRIES) {
             error.setVisibility(View.GONE);
         }
         adapter.setCursor(data);

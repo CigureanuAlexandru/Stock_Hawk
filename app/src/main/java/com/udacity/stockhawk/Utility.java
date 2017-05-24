@@ -1,5 +1,9 @@
 package com.udacity.stockhawk;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import java.text.SimpleDateFormat;
 
 public class Utility {
@@ -17,5 +21,12 @@ public class Utility {
         SimpleDateFormat format = new SimpleDateFormat(Utility.DATE_FORMAT);
         String monthDayString = format.format(dateInMillis);
         return monthDayString;
+    }
+
+    public static boolean networkUp(Context context) {
+        ConnectivityManager cm =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnectedOrConnecting();
     }
 }

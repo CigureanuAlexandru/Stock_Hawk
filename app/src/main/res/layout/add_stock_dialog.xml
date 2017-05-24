@@ -8,10 +8,12 @@
         android:id="@+id/dialog_stock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="@dimen/stock_et_margin"
+        android:layout_marginLeft="@dimen/stock_et_margin"
+        android:layout_marginEnd="@dimen/stock_et_margin"
+        android:layout_marginStart="@dimen/stock_et_margin"
+        android:layout_marginRight="@dimen/stock_et_margin"
+        android:layout_marginTop="@dimen/stock_et_margin_top"
         android:hint="@string/dialog_hint"
         android:inputType="textCapCharacters" />
     <TextView
@@ -20,6 +22,8 @@
         android:text="@string/add_quote_note"
         android:paddingStart="@dimen/add_stock_note_padding"
         android:paddingEnd="@dimen/add_stock_note_padding"
+        android:paddingLeft="@dimen/add_stock_note_padding"
+        android:paddingRight="@dimen/add_stock_note_padding"
         android:textAppearance="@android:style/TextAppearance.Small"/>
 
 </LinearLayout>

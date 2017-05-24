@@ -32,11 +32,8 @@ public class DetailWidgetProvider extends AppWidgetProvider {
             views.setOnClickPendingIntent(R.id.widget, pendingIntent);
 
             // Set up the collection
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                setRemoteAdapter(context, views);
-            } else {
-                setRemoteAdapterV11(context, views);
-            }
+            setRemoteAdapter(context, views);
+
             Intent clickIntentTemplate =  new Intent(context, DetailActivity.class);
 
             PendingIntent clickPendingIntentTemplate = TaskStackBuilder.create(context)

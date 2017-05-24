@@ -1,5 +1,7 @@
 <resources>
     <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="percentage_text_padding">3dp</dimen>
+
 
     <!-- Text Sizes - We are using DP here rather than SP because these are already large
          font sizes, and going larger will cause lots of view problems.  This is only for
@@ -14,6 +16,20 @@
     <dimen name="widget_detail_default_height">180dp</dimen>
     <dimen name="widget_detail_min_resize_width">220dp</dimen>
     <dimen name="widget_detail_min_resize_height">180dp</dimen>
+
     <dimen name="add_stock_note_padding">4dp</dimen>
+    <dimen name="stock_et_margin">4dp</dimen>
+    <dimen name="stock_et_margin_top">16dp</dimen>
+
+    <dimen name="price_tv_size">10sp</dimen>
+    <dimen name="percentage_tv_size">20sp</dimen>
+    <dimen name="bid_tv_size">20sp</dimen>
+    <dimen name="stock_symbol_tv_size">25sp</dimen>
+
+    <dimen name="fab_pressed_translation">12dp</dimen>
+    <dimen name="fab_elevation">6dp</dimen>
+    <dimen name="fab_border_width">0dp</dimen>
+    <dimen name="fab_layout_margin">16dp</dimen>
+
 
 </resources>
